@@ -2,6 +2,7 @@
   "dependencies": {
     "@create-figma-plugin/ui": "^4.0.3",
     "@create-figma-plugin/utilities": "^4.0.3",
+    "dotenv": "^17.2.2",
     "prismjs": "1.29.0",
     "react-simple-code-editor": "0.13.1"
   },
@@ -9,6 +10,7 @@
     "@create-figma-plugin/build": "^4.0.3",
     "@create-figma-plugin/tsconfig": "^4.0.3",
     "@figma/plugin-typings": "1.109.0",
+    "@types/node": "^24.5.2",
     "@types/prismjs": "1.26.3",
     "concurrently": "^9.2.1",
     "preact": "^10.27.2",
@@ -18,10 +20,10 @@
   "scripts": {
     "build": "npm run build:css && npm run build:js",
     "build:css": "npx tailwindcss --input ./src/input.css --output ./src/output.css",
-    "build:js": "build-figma-plugin --typecheck --minify",
+    "build:js": "node -r dotenv/config node_modules/.bin/build-figma-plugin --typecheck --minify",
     "watch": "npm run build:css && concurrently npm:watch:css npm:watch:js",
     "watch:css": "npx tailwindcss --input ./src/input.css --output ./src/output.css --watch",
-    "watch:js": "build-figma-plugin --typecheck --watch"
+    "watch:js": "node -r dotenv/config node_modules/.bin/build-figma-plugin --typecheck --watch"
   },
   "figma-plugin": {
     "editorType": [

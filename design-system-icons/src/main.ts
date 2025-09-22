@@ -410,7 +410,7 @@ export default function () {
 
   // Poll for selection changes with debouncing
   let lastSelectionId = ''
-  let debounceTimeout: number | null = null
+  let debounceTimeout: ReturnType<typeof setTimeout> | null = null
   
   const pollSelection = () => {
     const currentSelection = figma.currentPage.selection
