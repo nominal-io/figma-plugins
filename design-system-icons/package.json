@@ -1,0 +1,76 @@
+{
+  "dependencies": {
+    "@create-figma-plugin/ui": "^4.0.3",
+    "@create-figma-plugin/utilities": "^4.0.3",
+    "prismjs": "1.29.0",
+    "react-simple-code-editor": "0.13.1"
+  },
+  "devDependencies": {
+    "@create-figma-plugin/build": "^4.0.3",
+    "@create-figma-plugin/tsconfig": "^4.0.3",
+    "@figma/plugin-typings": "1.109.0",
+    "@types/prismjs": "1.26.3",
+    "concurrently": "^9.2.1",
+    "preact": "^10.27.2",
+    "tailwindcss": "^3.4.17",
+    "typescript": ">=5"
+  },
+  "scripts": {
+    "build": "npm run build:css && npm run build:js",
+    "build:css": "npx tailwindcss --input ./src/input.css --output ./src/output.css",
+    "build:js": "build-figma-plugin --typecheck --minify",
+    "watch": "npm run build:css && concurrently npm:watch:css npm:watch:js",
+    "watch:css": "npx tailwindcss --input ./src/input.css --output ./src/output.css --watch",
+    "watch:js": "build-figma-plugin --typecheck --watch"
+  },
+  "figma-plugin": {
+    "editorType": [
+      "figma"
+    ],
+    "id": "figma-icons",
+    "name": "Design System Icons",
+    "main": "src/main.ts",
+    "ui": "src/ui.tsx",
+    "menu": [
+      {
+        "name": "Design System Icons",
+        "main": "src/main.ts",
+        "ui": "src/ui.tsx"
+      },
+      "-",
+      {
+        "name": "Flatten Icons",
+        "main": "src/flatten-main.ts"
+      },
+      {
+        "name": "Add to Design System",
+        "main": "src/add-to-design-system-main.ts"
+      }
+    ],
+    "relaunchButtons": {
+      "designSystemIcons": {
+        "name": "Design System Icons",
+        "main": "src/main.ts",
+        "ui": "src/ui.tsx",
+        "multipleSelection": true
+      },
+      "flattenIcons": {
+        "name": "Flatten Icons",
+        "main": "src/flatten-main.ts",
+        "multipleSelection": true
+      },
+      "addToDesignSystem": {
+        "name": "Add to Design System",
+        "main": "src/add-to-design-system-main.ts",
+        "multipleSelection": true
+      }
+    },
+    "networkAccess": {
+      "allowedDomains": [
+        "api.github.com",
+        "github.com"
+      ],
+      "reasoning": "Plugin needs to access GitHub API to trigger design system workflows and manage icon repositories"
+    }
+  }
+}
