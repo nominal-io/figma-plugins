@@ -20,10 +20,10 @@
   "scripts": {
     "build": "npm run build:css && npm run build:js",
     "build:css": "npx tailwindcss --input ./src/input.css --output ./src/output.css",
-    "build:js": "node -r dotenv/config node_modules/.bin/build-figma-plugin --typecheck --minify",
+    "build:js": "node -r dotenv/config ./node_modules/@create-figma-plugin/build/lib/cli.js --typecheck --minify",
     "watch": "npm run build:css && concurrently npm:watch:css npm:watch:js",
     "watch:css": "npx tailwindcss --input ./src/input.css --output ./src/output.css --watch",
-    "watch:js": "node -r dotenv/config node_modules/.bin/build-figma-plugin --typecheck --watch"
+    "watch:js": "node -r dotenv/config ./node_modules/@create-figma-plugin/build/lib/cli.js --typecheck --watch"
   },
   "figma-plugin": {
     "editorType": [
@@ -69,8 +69,8 @@
     },
     "networkAccess": {
       "allowedDomains": [
-        "api.github.com",
-        "github.com"
+        "https://api.github.com",
+        "https://github.com"
       ],
       "reasoning": "Plugin needs to access GitHub API to trigger design system workflows and manage icon repositories"
     }
